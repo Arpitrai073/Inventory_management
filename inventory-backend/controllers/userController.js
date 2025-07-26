@@ -1,10 +1,8 @@
-// controllers/userController.js
+
 import User from '../models/User.js';
 import generateToken from '../utils/generateToken.js';
 
-// @desc    Register a new user
-// @route   POST /api/users/register
-// @access  Public
+
 const registerUser = async (req, res) => {
   const { username, password } = req.body;
 
@@ -30,9 +28,7 @@ const registerUser = async (req, res) => {
   }
 };
 
-// @desc    Auth user & get token
-// @route   POST /api/users/login
-// @access  Public
+
 const authUser = async (req, res) => {
   const { username, password } = req.body;
 
@@ -42,7 +38,7 @@ const authUser = async (req, res) => {
     res.json({
       _id: user._id,
       username: user.username,
-      token: generateToken(user._id), // Using 'token' key instead of 'access_token' for consistency
+      token: generateToken(user._id), 
     });
   } else {
     res.status(401).json({ message: 'Invalid username or password' });
