@@ -1,0 +1,25 @@
+# docker-compose.yml
+
+version: '3.8'
+
+services:
+  # Backend API Service
+  backend:
+    build:
+      context: ./inventory-backend # Path to the backend Dockerfile
+    ports:
+      - "8080:8080" # Map host port 8080 to container port 8080
+    env_file:
+      - ./inventory-backend/.env # Load environment variables from the backend's .env file
+
+  # Frontend Client Service
+  frontend:
+    build:
+      context: ./inventory-frontend # Path to the frontend Dockerfile
+      args:
+        # Pass the backend URL as a build argument
+        VITE_API_BASE_URL: http://backend:8080/api
+    ports:
+      - "5173:80" # Map host port 5173 to container port 80 (Nginx)
+    depends_on:
+      - backend # Ensures the backend starts before the frontend

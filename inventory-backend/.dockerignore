@@ -1,0 +1,12 @@
+# Dependency directory
+node_modules
+
+# Environment variables (never include in the image)
+.env
+
+# Logs
+npm-debug.log
+
+# Docker files
+Dockerfile
+.dockerignore
